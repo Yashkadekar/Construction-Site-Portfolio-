@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Projects | BuildRight Construction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="font-sans bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+    <!-- Header -->
+    <header class="fixed w-full bg-white shadow-md z-50 dark:bg-gray-800 dark:shadow-gray-800/50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mr-3">
+                    <i class="fas fa-hammer text-white text-xl"></i>
+                </div>
+                <a href="index.html#home" class="text-2xl font-bold text-gray-800 dark:text-white">Build<span class="text-amber-500">Right</span></a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="index.html#home" class="text-gray-800 hover:text-amber-500 font-medium transition dark:text-gray-300 dark:hover:text-amber-400">Home</a>
+                <a href="index.html#services" class="text-gray-800 hover:text-amber-500 font-medium transition dark:text-gray-300 dark:hover:text-amber-400">Services</a>
+                <a href="index.html#projects" class="text-amber-500 font-semibold">Projects</a>
+                <a href="index.html#about" class="text-gray-800 hover:text-amber-500 font-medium transition dark:text-gray-300 dark:hover:text-amber-400">About</a>
+                <a href="index.html#contact" class="text-gray-800 hover:text-amber-500 font-medium transition dark:text-gray-300 dark:hover:text-amber-400">Contact</a>
+            </nav>
+
+            <!-- Theme + Mobile -->
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-full focus:outline-none">
+                    <i class="fas fa-sun text-gray-700 dark:text-amber-400" id="theme-icon"></i>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden text-gray-800 dark:text-gray-300 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Nav -->
+        <div id="mobile-menu" class="mobile-menu bg-white dark:bg-gray-800 md:hidden max-h-0 overflow-hidden transition-[max-height] duration-500 ease-out">
+            <div class="px-4 py-3 space-y-4">
+                <a href="index.html#home" class="block text-gray-800 hover:text-amber-500 font-medium transition dark:text-gray-300 dark:hover:text-amber-400">Home</a>
+                <a href="index.html#services" class="block text-gray-800 hover:text-amber-500 font-medium transition dark:text-gray-300 dark:hover:text-amber-400">Services</a>
+                <a href="index.html#projects" class="block text-amber-500 font-semibold">Projects</a>
+                <a href="index.html#about" class="block text-gray-800 hover:text-amber-500 font-medium transition dark:text-gray-300 dark:hover:text-amber-400">About</a>
+                <a href="index.html#contact" class="block text-gray-800 hover:text-amber-500 font-medium transition dark:text-gray-300 dark:hover:text-amber-400">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="pt-32 pb-16 bg-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl md:text-5xl font-bold">All Projects</h1>
+            <p class="mt-4 text-gray-300 max-w-2xl">Browse our complete portfolio of residential, commercial, and renovation projects.</p>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="fixed inset-0 hidden items-center justify-center bg-black/70 z-[60]">
+        <div class="bg-white dark:bg-gray-800 rounded-xl max-w-5xl w-full mx-4 overflow-hidden shadow-xl">
+            <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-white/10">
+                <h3 id="pm-title" class="text-lg md:text-xl font-bold text-gray-800 dark:text-white">Project</h3>
+                <button id="pm-close" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" aria-label="Close">
+                    <span class="text-2xl leading-none">×</span>
+                </button>
+            </div>
+            <div class="p-4 space-y-4">
+                <p id="pm-desc" class="text-gray-600 dark:text-gray-300"></p>
+                <div class="relative">
+                    <img id="pm-image" src="" alt="Project image" class="w-full h-96 object-cover rounded-lg">
+                    <button id="pm-prev" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-gray-700 text-gray-800 dark:text-white w-9 h-9 rounded-full flex items-center justify-center hover:bg-white shadow" aria-label="Previous">‹</button>
+                    <button id="pm-next" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-gray-700 text-gray-800 dark:text-white w-9 h-9 rounded-full flex items-center justify-center hover:bg-white shadow" aria-label="Next">›</button>
+                </div>
+                <div id="pm-thumbs" class="flex gap-2 overflow-x-auto"></div>
+                <!-- Pricing (optional) -->
+                <div id="pm-pricing" class="hidden border-t border-gray-200 dark:border-white/10 pt-4">
+                    <h4 class="text-base font-semibold text-gray-800 dark:text-white mb-3">Unit Pricing</h4>
+                    <div id="pm-pricing-rows" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
+                    <p class="text-xs text-gray-500 mt-2">Prices are indicative and subject to change.</p>
+                </div>
+                <!-- Key details (optional) -->
+                <div id="pm-details" class="hidden border-t border-gray-200 dark:border-white/10 pt-4">
+                    <h4 class="text-base font-semibold text-gray-800 dark:text-white mb-3">Key Details</h4>
+                    <ul id="pm-details-list" class="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-300"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Grid -->
+    <section class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Repeatable card template -->
+                <!-- Cards 1-12 -->
+                
+                <!-- Card 1 -->
+                <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition dark:bg-gray-800 project-card cursor-pointer"
+                     data-title="Modern Residence"
+                     data-description="Sustainable family home with open-plan living."
+                     data-images="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=1600&q=80|https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1600&q=80|https://images.unsplash.com/photo-1505692794403-34d4982f88aa?auto=format&fit=crop&w=1600&q=80"
+                     data-price1bhk="₹42L"
+                     data-price2bhk="₹62L"
+                     data-price3bhk="₹82L"
+                     data-details="Location: Lakeview Enclave|Possession: Q3 2026|Amenities: Garden, Kids Play Area, Gym">
+                    <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=1200&auto=format&fit=crop" alt="Modern Residence" class="w-full h-56 object-cover" />
+                    <div class="p-5">
+                        <h3 class="text-lg font-semibold">Modern Residence</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">Sustainable family home with open-plan living.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition dark:bg-gray-800 project-card cursor-pointer"
+                     data-title="Downtown Office Complex"
+                     data-description="12-story commercial building with retail space."
+                     data-price1bhk="₹1.10Cr"
+                     data-price2bhk="₹1.45Cr"
+                     data-price3bhk="₹1.95Cr"
+                     data-images="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1600&q=80|https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80|https://images.unsplash.com/photo-1521540216272-a50305cd4421?auto=format&fit=crop&w=1600&q=80">
+                    <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1200&auto=format&fit=crop" alt="Office Complex" class="w-full h-56 object-cover" />
+                    <div class="p-5">
+                        <h3 class="text-lg font-semibold">Downtown Office Complex</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">12-story commercial building with retail space.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition dark:bg-gray-800 project-card cursor-pointer"
+                     data-title="Luxury Kitchen Remodel"
+                     data-description="Chef-inspired redesign with premium finishes."
+                     data-price1bhk="₹15L"
+                     data-price2bhk="₹22L"
+                     data-price3bhk="₹29L"
+                     data-images="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=80|https://images.unsplash.com/photo-1556909212-d5d32d2a2f02?auto=format&fit=crop&w=1600&q=80|https://images.unsplash.com/photo-1550088490-0a887b85a4ea?auto=format&fit=crop&w=1600&q=80">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200&auto=format&fit=crop" alt="Kitchen Remodel" class="w-full h-56 object-cover" />
+                    <div class="p-5">
+                        <h3 class="text-lg font-semibold">Luxury Kitchen Remodel</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">Chef-inspired redesign with premium finishes.</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition dark:bg-gray-800 project-card cursor-pointer"
+                     data-title="Urban Apartments"
+                     data-description="Multi-family residential complex with amenities."
+                     data-price1bhk="₹38L"
+                     data-price2bhk="₹58L"
+                     data-price3bhk="₹78L">
+                    <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=1200&auto=format&fit=crop" alt="Urban Apartments" class="w-full h-56 object-cover" />
+                    <div class="p-5">
+                        <h3 class="text-lg font-semibold">Urban Apartments</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">Multi-family residential complex with amenities.</p>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition dark:bg-gray-800 project-card cursor-pointer"
+                     data-title="Retail Plaza"
+                     data-description="Community-focused shopping destination."
+                     data-price1bhk="₹55L"
+                     data-price2bhk="₹78L"
+                     data-price3bhk="₹1.05Cr">
+                    <img src="https://images.unsplash.com/photo-1505691723518-36a5ac3b2d95?q=80&w=1200&auto=format&fit=crop" alt="Retail Plaza" class="w-full h-56 object-cover" />
+                    <div class="p-5">
+                        <h3 class="text-lg font-semibold">Retail Plaza</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">Community-focused shopping destination.</p>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition dark:bg-gray-800 project-card cursor-pointer"
+                     data-title="Hotel Renovation"
+                     data-description="Lobby and suites modernization."
+                     data-price1bhk="₹48L"
+                     data-price2bhk="₹72L"
+                     data-price3bhk="₹96L">
+                    <img src="https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=1200&auto=format&fit=crop" alt="Hotel Renovation" class="w-full h-56 object-cover" />
+                    <div class="p-5">
+                        <h3 class="text-lg font-semibold">Hotel Renovation</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">Lobby and suites modernization.</p>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition dark:bg-gray-800 project-card cursor-pointer"
+                     data-title="Custom Villa"
+                     data-description="Mediterranean-style luxury residence."
+                     data-images="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1600&q=80|https://images.unsplash.com/photo-1505692794403-34d4982f88aa?auto=format&fit=crop&w=1600&q=80|https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1600&q=80"
+                     data-price1bhk="₹1.10Cr"
+                     data-price2bhk="₹1.35Cr"
+                     data-price3bhk="₹1.6Cr"
+                     data-details="Plot: 4500 sq.ft|Pool: Infinity|Interiors: Italian Marble">
+                    <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop" alt="Custom Villa" class="w-full h-56 object-cover" />
+                    <div class="p-5">
+                        <h3 class="text-lg font-semibold">Custom Villa</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">Mediterranean-style luxury residence.</p>
+                    </div>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition dark:bg-gray-800 project-card cursor-pointer"
+                     data-title="Healthcare Center"
+                     data-description="Outpatient facility with specialized wings."
+                     data-price1bhk="₹85L"
+                     data-price2bhk="₹1.20Cr"
+                     data-price3bhk="₹1.55Cr">
+                    <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=1200&auto=format&fit=crop" alt="Healthcare Center" class="w-full h-56 object-cover" />
+                    <div class="p-5">
+                        <h3 class="text-lg font-semibold">Healthcare Center</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">Outpatient facility with specialized wings.</p>
+                    </div>
+                </div>
+
+                <!-- Card 9 -->
+                <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition dark:bg-gray-800 project-card cursor-pointer"
+                     data-title="Community Park"
+                     data-description="Recreational space with sustainable design."
+                     data-price1bhk="₹20L"
+                     data-price2bhk="₹32L"
+                     data-price3bhk="₹44L">
+                    <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1200&auto=format&fit=crop" alt="Community Park" class="w-full h-56 object-cover" />
+                    <div class="p-5">
+                        <h3 class="text-lg font-semibold">Community Park</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">Recreational space with sustainable design.</p>
+                    </div>
+                </div>
+
+                <!-- Card 10 -->
+                <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition dark:bg-gray-800 project-card cursor-pointer"
+                     data-title="Warehouse Facility"
+                     data-description="Logistics hub with energy-efficient systems."
+                     data-price1bhk="₹70L"
+                     data-price2bhk="₹95L"
+                     data-price3bhk="₹1.30Cr">
+                    <img src="https://images.unsplash.com/photo-1541976076758-347942db1970?q=80&w=1200&auto=format&fit=crop" alt="Warehouse Facility" class="w-full h-56 object-cover" />
+                    <div class="p-5">
+                        <h3 class="text-lg font-semibold">Warehouse Facility</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">Logistics hub with energy-efficient systems.</p>
+                    </div>
+                </div>
+
+                <!-- Card 11 -->
+                <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition dark:bg-gray-800 project-card cursor-pointer"
+                     data-title="Retail Flagship"
+                     data-description="Premium flagship store build-out."
+                     data-price1bhk="₹60L"
+                     data-price2bhk="₹88L"
+                     data-price3bhk="₹1.25Cr">
+                    <img src="https://images.unsplash.com/photo-1505691723518-36a5ac3b2d95?q=80&w=1200&auto=format&fit=crop" alt="Retail Flagship" class="w-full h-56 object-cover" />
+                    <div class="p-5">
+                        <h3 class="text-lg font-semibold">Retail Flagship</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">Premium flagship store build-out.</p>
+                    </div>
+                </div>
+
+                <!-- Card 12 -->
+                <div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition dark:bg-gray-800 project-card cursor-pointer"
+                     data-title="Exterior Facade Upgrade"
+                     data-description="Modern cladding and energy improvements."
+                     data-price1bhk="₹28L"
+                     data-price2bhk="₹40L"
+                     data-price3bhk="₹58L">
+                    <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=1200&auto=format&fit=crop" alt="Exterior Facade" class="w-full h-56 object-cover" />
+                    <div class="p-5">
+                        <h3 class="text-lg font-semibold">Exterior Facade Upgrade</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">Modern cladding and energy improvements.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-20 pb-10 border-t border-white/10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-hammer text-white"></i>
+                        </div>
+                        <a href="index.html#home" class="text-xl font-bold">Build<span class="text-amber-500">Right</span></a>
+                    </div>
+                    <p class="text-gray-400">Building excellence since 1998. We're committed to quality construction and exceptional customer service.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#home" class="text-gray-400 hover:text-amber-400 transition">Home</a></li>
+                        <li><a href="index.html#services" class="text-gray-400 hover:text-amber-400 transition">Services</a></li>
+                        <li><a href="index.html#projects" class="text-gray-400 hover:text-amber-400 transition">Projects</a></li>
+                        <li><a href="index.html#about" class="text-gray-400 hover:text-amber-400 transition">About Us</a></li>
+                        <li><a href="index.html#contact" class="text-gray-400 hover:text-amber-400 transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-amber-400 transition">Residential Construction</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-400 transition">Commercial Construction</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-400 transition">Renovation & Remodeling</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-400 transition">Project Management</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-400 transition">Custom Home Building</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Contact Info</h3>
+                    <address class="not-italic text-gray-400 space-y-3">
+                        <p><i class="fas fa-map-marker-alt text-amber-400 mr-2"></i> 123 Construction Way, Building City, BC 12345</p>
+                        <p><i class="fas fa-phone-alt text-amber-400 mr-2"></i> (123) 456-7890</p>
+                        <p><i class="fas fa-envelope text-amber-400 mr-2"></i> info@buildright.com</p>
+                    </address>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-amber-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-amber-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-amber-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-amber-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 BuildRight Construction. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-amber-400 text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-amber-400 text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-amber-400 text-sm transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-amber-500 text-white rounded-full shadow-lg flex items-center justify-center transition duration-300 opacity-0 invisible hover:bg-amber-600">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            const isOpen = mobileMenu.style.maxHeight && mobileMenu.style.maxHeight !== '0px';
+            mobileMenu.style.maxHeight = isOpen ? '0px' : '500px';
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Dark/Light mode toggle (persist)
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        if (localStorage.getItem('color-theme') === 'dark' ||
+            (!localStorage.getItem('color-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            themeIcon.classList.toggle('fa-sun', !isDark);
+            themeIcon.classList.toggle('fa-moon', isDark);
+            localStorage.setItem('color-theme', isDark ? 'dark' : 'light');
+        });
+
+        // Project modal logic
+        const modal = document.getElementById('project-modal');
+        const pmTitle = document.getElementById('pm-title');
+        const pmDesc = document.getElementById('pm-desc');
+        const pmImage = document.getElementById('pm-image');
+        const pmPrev = document.getElementById('pm-prev');
+        const pmNext = document.getElementById('pm-next');
+        const pmThumbs = document.getElementById('pm-thumbs');
+        const pmClose = document.getElementById('pm-close');
+        const pmPricing = document.getElementById('pm-pricing');
+        const pmPricingRows = document.getElementById('pm-pricing-rows');
+        const pmDetails = document.getElementById('pm-details');
+        const pmDetailsList = document.getElementById('pm-details-list');
+        const cards = document.querySelectorAll('.project-card');
+
+        let gallery = [];
+        let currentIndex = 0;
+        const defaultDetails = [
+            'Location: Green Valley',
+            'Possession: Q4 2025',
+            'Amenities: Pool, Gym, Clubhouse',
+        ];
+
+        function renderGallery() {
+            if (!gallery.length) return;
+            pmImage.src = gallery[currentIndex];
+            pmThumbs.innerHTML = '';
+            gallery.forEach((src, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'flex-shrink-0 border-2 rounded-md overflow-hidden';
+                btn.classList.add(i === currentIndex ? 'border-amber-500' : 'border-transparent');
+                btn.innerHTML = `<img src="${src}" class="w-20 h-16 object-cover" alt="thumb-${i}">`;
+                btn.addEventListener('click', () => {
+                    currentIndex = i;
+                    renderGallery();
+                });
+                pmThumbs.appendChild(btn);
+            });
+        }
+
+        function openModalFromCard(card) {
+            pmTitle.textContent = card.dataset.title || 'Project';
+            pmDesc.textContent = card.dataset.description || '';
+            const imgs = (card.dataset.images || '').split('|').filter(Boolean);
+            gallery = imgs.length ? imgs : [card.querySelector('img')?.src].filter(Boolean);
+            currentIndex = 0;
+            renderGallery();
+            // Pricing
+            const p1 = card.dataset.price1bhk || '';
+            const p2 = card.dataset.price2bhk || '';
+            const p3 = card.dataset.price3bhk || '';
+            pmPricingRows.innerHTML = '';
+            let entries = [
+                { label: '1 BHK', value: p1 },
+                { label: '2 BHK', value: p2 },
+                { label: '3 BHK', value: p3 },
+            ].filter(e => e.value);
+            if (entries.length) {
+                entries.forEach(e => {
+                    const item = document.createElement('div');
+                    item.className = 'rounded-lg border border-gray-200 dark:border-white/10 p-3 text-center';
+                    item.innerHTML = `<div class="text-sm text-gray-500 dark:text-gray-400">${e.label}</div><div class="text-lg font-semibold text-gray-800 dark:text-white">${e.value}</div>`;
+                    pmPricingRows.appendChild(item);
+                });
+                pmPricing.classList.remove('hidden');
+            } else {
+                pmPricing.classList.add('hidden');
+            }
+            // Details
+            pmDetailsList.innerHTML = '';
+            let details = (card.dataset.details || '').split('|').map(s => s.trim()).filter(Boolean);
+            if (!details.length) {
+                details = defaultDetails;
+            }
+            if (details.length) {
+                details.forEach(d => {
+                    const li = document.createElement('li');
+                    li.textContent = d;
+                    pmDetailsList.appendChild(li);
+                });
+                pmDetails.classList.remove('hidden');
+            } else {
+                pmDetails.classList.add('hidden');
+            }
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        cards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('a')) e.preventDefault();
+                openModalFromCard(card);
+            });
+        });
+
+        pmPrev?.addEventListener('click', () => {
+            if (!gallery.length) return;
+            currentIndex = (currentIndex - 1 + gallery.length) % gallery.length;
+            renderGallery();
+        });
+
+        pmNext?.addEventListener('click', () => {
+            if (!gallery.length) return;
+            currentIndex = (currentIndex + 1) % gallery.length;
+            renderGallery();
+        });
+
+        pmClose?.addEventListener('click', closeModal);
+        modal?.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (!modal || modal.classList.contains('hidden')) return;
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowRight') pmNext.click();
+            if (e.key === 'ArrowLeft') pmPrev.click();
+        });
+    </script>
+</body>
+</html>
